@@ -83,7 +83,11 @@ def save_video(user_input='', cookie=''):
     return -1
 
   file_name = f'{video_title}-{video_page}-{video_page_title}'
-  download_video(url=video_url[user_choice], qn=video_qn[user_choice], file=file_name)
+  download_video(
+    url=video_url[user_choice], 
+    qn=video_qn[user_choice], 
+    file=file_name
+  )
 
 
 def get_video_info(bvid='', page=0, cookie=''):
@@ -122,7 +126,9 @@ def get_video_info(bvid='', page=0, cookie=''):
   para = {
     'bvid': bvid,
     'cid': video_cid,
-    'qn': '64',
+    'qn': '120',
+    'fnval': '128',
+    'fourk': '1',
   }
   for _ in range(10):
     video_res = requests.get(
@@ -132,7 +138,6 @@ def get_video_info(bvid='', page=0, cookie=''):
     )
     if video_res.status_code == 200:
       break
-    time.sleep(0.1)
   video_json = video_res.json()
 
   # print(json.dumps(video_json))
